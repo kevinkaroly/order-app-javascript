@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bestell-App</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/standard.css" />
+    <link rel="stylesheet" href="styles/assets.css" />
+    <link rel="stylesheet" href="styles/basket.css" />
+    <link rel="shortcut icon" href="assets/Favicon/favicon-32x32.png" type="image/x-icon">
+    <script src="scripts/db.js"></script>
+    <script src="scripts/template.js"></script>
+    <script src="scripts/basket.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body onload="init()">
+    <header>
+      <div class="headerContent">
+        <img
+          class="headerLogo"
+          src="assets/icons/Bestell App- Logo.svg"
+          alt="Logo"
+        />
+      </div>
+    </header>
+
+    <div id="menuContainer">
+      <section id="menu"></section>
+      <section id="basketContainer">
+        <div id="basket" class="basket"></div>
+      </section>
+    </div>
+
+    <footer>
+        <div class="footerContent"></div>
+    </footer>
+  </body>
+</html>
