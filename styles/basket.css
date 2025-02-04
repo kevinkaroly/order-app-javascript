@@ -1,5 +1,5 @@
-h3{
-    text-align: center;
+h3 {
+  text-align: center;
 }
 #basketContainer {
   width: 300px;
@@ -14,13 +14,12 @@ h3{
   position: sticky;
   top: 0;
   box-sizing: content-box;
-  
 }
 #basket p {
-    text-align: right;
-    display: flex;
-    justify-content: space-between;
-    gap: 60px;
+  text-align: right;
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
 }
 .burgerInBasket {
   margin: 10px 0;
@@ -75,4 +74,66 @@ h3{
 .quantityDisplay {
   font-size: 18px;
   font-weight: bold;
+}
+
+/* Warenkorb-Overlay */
+#basketOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+#basketContent {
+  background: white;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  margin: 0 auto;
+}
+#basketButton {
+  display: none;
+}
+
+#closeBasket {
+  position: absolute;
+  top: 5px;
+  right: 35px;
+  background: none;
+  border: none;
+  font-size: 36px;
+  cursor: pointer;
+  color: #ff8000;
+}
+
+@media (max-width: 768px) {
+  #basketContainer {
+    display: none;
+  }
+  .btnDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #basketButton {
+    background-color: #0d00ff;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+    width: 100%;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
