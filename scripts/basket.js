@@ -58,7 +58,6 @@ function showBasket() {
     deliveryCost = 0;
   }
 
-  // Durchlaufe alle Burger im Warenkorb und erstelle HTML
   basket.forEach((burger, index) => {
     let burgerTotal = burger.price * burger.quantity;
     subtotal += burgerTotal;
@@ -85,16 +84,13 @@ function showBasket() {
       <p><b>Gesamtpreis:</b> ${totalPrice.toFixed(2)} €</p>
     `;
 
-  // Aktualisiere den Warenkorb im Desktop-Container
   basketContainer.innerHTML = basketToHTML;
 
-  // Aktualisiere den Warenkorb im mobilen Container
   mobileBasketContainer.innerHTML = basketToHTML;
 
-  // Überprüfen ob das Overlay sichtbar ist und ggf. anzeigen
   const overlay = document.getElementById("overlay");
   if (overlay) {
-    overlay.style.display = "block"; // Oder andere Methode, das Overlay anzuzeigen
+    overlay.style.display = "block";
   }
 }
 
@@ -102,8 +98,18 @@ function openBasket() {
   document.getElementById("mobileBasket").innerHTML =
     document.getElementById("basket").innerHTML;
   document.getElementById("basketOverlay").style.display = "flex";
+  toggleBodyScroll();
 }
 
 function closeBasket() {
   document.getElementById("basketOverlay").style.display = "none";
+  toggleBodyScroll();
+}
+function toggleBodyScroll() {
+  const basketOverlay = document.getElementById("basketOverlay");
+  if (basketOverlay.style.display === "flex") {
+      document.body.style.overflow = "hidden"; // Scrollen deaktivieren
+  } else {
+      document.body.style.overflow = "auto"; // Scrollen wieder aktivieren
+  }
 }

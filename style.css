@@ -3,6 +3,7 @@ header {
   height: 100px;
   background-color: #ff8000;
 }
+
 .headerContent {
   height: 100px;
   width: 100%;
@@ -11,25 +12,69 @@ header {
   margin: 0 auto;
   padding: 20px;
 }
+
 .headerLogo {
   height: 60px;
   width: auto;
 }
 
 /* Footer */
+.footerImg {
+  height: 60px;
+  width: auto;
+}
 
 footer {
   height: 100px;
   background-color: #ff8000;
+  color: white;
+  box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
 }
+
 .footerContent {
-    height: 100px;
-    width: 100%;
-    max-width: 1920px;
-    display: flex;
-    margin: 0 auto;
-    padding: 20px;
-  }
+  height: 100px;
+  width: 100%;
+  max-width: 1920px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+  font-size: 18px;
+}
+
+a:hover {
+  color: #67370e;
+  transform: translateY(-3px);
+}
+
+a:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: #000000;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+a:hover:before {
+  width: 100%;
+  left: 0;
+}
+
+a:active {
+  color: #d35400;
+}
+
 /* Main Content */
 
 #headerContainer {
@@ -73,7 +118,6 @@ h1 {
 }
 
 .burgerItem {
-  position: relative;
   border: 1px solid #ddd;
   padding: 15px;
   margin: 10px;
@@ -82,9 +126,17 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-between;
   width: auto;
   cursor: pointer;
+}
+
+.burgerFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
 }
 
 .burgerItem:hover {
@@ -99,6 +151,18 @@ h1 {
   margin: 10px 0;
   font-weight: bold;
   color: #e67e22;
+}
+
+@media (max-width: 768px) {
+  .footerContent {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .links {
+    gap: 10px;
+    font-size: 16px;
+  }
 }
 
 /* Scrollbar */

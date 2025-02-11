@@ -4,7 +4,15 @@
     padding: 0;
     scroll-behavior: smooth;
 }
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Tinos", serif;
     text-align: center;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
 }

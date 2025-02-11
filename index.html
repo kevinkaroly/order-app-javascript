@@ -13,6 +13,12 @@
       href="assets/Favicon/favicon-32x32.png"
       type="image/x-icon"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Righteous&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
     <script src="scripts/db.js"></script>
     <script src="scripts/template.js"></script>
     <script src="scripts/basket.js"></script>
@@ -21,11 +27,12 @@
   <body onload="init()">
     <header>
       <div class="headerContent">
-        <img
-          class="headerLogo"
-          src="assets/icons/Bestell App- Logo.svg"
-          alt="Logo"
-        />
+        <a href="index.html"
+          ><img
+            class="headerLogo"
+            src="assets/icons/Bestell App- Logo.svg"
+            alt="Logo"
+        /></a>
       </div>
     </header>
 
@@ -46,7 +53,20 @@
       </div>
     </div>
     <footer>
-      <div class="footerContent"></div>
+      <div class="footerContent">
+        <div class="footerLogo">
+          <a href="index.html"
+            ><img
+              class="footerImg"
+              src="assets/icons/Bestell App- Logo.svg"
+              alt="Logo"
+          /></a>
+        </div>
+        <div class="links">
+          <a href="impressum.html">Impressum</a>
+          <a href="datenschutz.html">Datenschutz</a>
+        </div>
+      </div>
     </footer>
   </body>
 </html>

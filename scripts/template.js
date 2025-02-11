@@ -17,11 +17,14 @@ function createBurgerTemplate(burger, index) {
         <div class="burgerItem">
             <h3>${burger.name}</h3>
             <p>${burger.description}</p>
-            <span class="price">${burger.price.toFixed(2)} €</span>
-            <button class="btn" onclick="addToCart(${index})">+</button>
+            <div class="burgerFooter">
+                <span class="price">${burger.price.toFixed(2)} €</span>
+                <button class="btn" onclick="addToCart(${index})">+</button>
+            </div>
         </div>
     `;
 }
+
 
 function renderMenu() {
     const menuContainer = document.getElementById("menu");
