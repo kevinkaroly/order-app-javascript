@@ -76,6 +76,12 @@ a:active {
 }
 
 /* Main Content */
+.no-scroll {
+  overflow: hidden !important;
+}
+.visible {
+  display: flex !important;
+}
 
 #headerContainer {
   display: flex;
@@ -130,7 +136,9 @@ h1 {
   width: auto;
   cursor: pointer;
 }
-
+.burgerItem p{
+  text-align: left;
+}
 .burgerFooter {
   display: flex;
   justify-content: space-between;
@@ -153,6 +161,19 @@ h1 {
   color: #e67e22;
 }
 
+.orderConfirmation{
+  background-color: #ff8000;
+  font-size: 30px;
+  color: white;
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
 @media (max-width: 768px) {
   .footerContent {
     flex-direction: column;
@@ -162,6 +183,9 @@ h1 {
   .links {
     gap: 10px;
     font-size: 16px;
+  }
+  #menu{
+    padding: 0;
   }
 }
 

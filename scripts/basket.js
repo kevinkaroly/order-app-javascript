@@ -1,29 +1,47 @@
 let basket = [];
 
+function displayBasketButton() {
+  const btnDiv = document.getElementById('btnDiv');
+  btnDiv.innerHTML = createBasketButton();
+}
+
 function addToCart(index) {
-  const burger = burgerMenu[index];
-  const burgerWithID = {
+  const burger = getBurgerByIndex(index);
+  const existingBurger = findBurgerInBasket(index);
+
+  if (existingBurger) {
+    increaseQuantity(existingBurger);
+  } else {
+    addNewBurgerToBasket(burger, index);
+  }
+  showBasket();
+}
+
+function getBurgerByIndex(index) {
+  return burgerMenu[index];
+}
+
+function findBurgerInBasket(index) {
+  for (let i = 0; i < basket.length; i++) {
+    if (basket[i].id === index) {
+      return basket[i];
+    }
+  }
+}
+
+function increaseQuantity(burger) {
+  burger.quantity++;
+}
+
+function addNewBurgerToBasket(burger, index) {
+  let burgerWithID = {
     name: burger.name,
     description: burger.description,
     price: burger.price,
     id: index,
     quantity: 1,
   };
-
-  let existingBurger = null;
-  for (let i = 0; i < basket.length; i++) {
-    if (basket[i].id === burgerWithID.id) {
-      existingBurger = basket[i];
-      break;
-    }
-  }
-
-  if (existingBurger) {
-    existingBurger.quantity++;
-  } else {
-    basket.push(burgerWithID);
-  }
-  showBasket();
+  basket.push(burgerWithID);
 }
 
 function changeQuantity(index, amount) {
@@ -38,7 +56,10 @@ function changeQuantity(index, amount) {
 }
 
 function removeFromBasket(index) {
-  basket.splice(index, 1);
+  for (let i = index; i < basket.length - 1; i++) {
+    basket[i] = basket[i + 1];
+  }
+  basket.pop();
   showBasket();
 }
 
@@ -46,70 +67,112 @@ function showBasket() {
   const basketContainer = document.getElementById("basket");
   const mobileBasketContainer = document.getElementById("mobileBasket");
 
-  let basketToHTML = `<h3>Warenkorb (${basket.reduce(
-    (sum, burger) => sum + burger.quantity,
-    0
-  )} Artikel)</h3><br>`;
+  const subtotal = calculateSubtotal();
+  const deliveryCost = calculateDeliveryCost();
+  const totalPrice = subtotal + deliveryCost;
 
+  const basketHTML = createBasketTemplate(
+    basket,
+    subtotal,
+    deliveryCost,
+    totalPrice
+  );
+
+  updateBasketUI(basketContainer, mobileBasketContainer, basketHTML);
+  toggleOverlay(true);
+}
+
+function calculateSubtotal() {
   let subtotal = 0;
-  let deliveryCost = 5;
-
-  if (basket.length === 0) {
-    deliveryCost = 0;
+  for (let i = 0; i < basket.length; i++) {
+    subtotal += basket[i].price * basket[i].quantity;
   }
+  return subtotal;
+}
 
-  basket.forEach((burger, index) => {
-    let burgerTotal = burger.price * burger.quantity;
-    subtotal += burgerTotal;
+function calculateDeliveryCost() {
+  if (basket.length === 0) {
+    return 0;
+  }
+  return 5;
+}
 
-    basketToHTML += `
-        <div class="burgerInBasket">
-          <p>${burger.name} - ${burgerTotal.toFixed(2)} €</p>
-          <div class="burgerControls">
-            <button class="decrease" onclick="changeQuantity(${index}, -1)">-</button>
-            <span class="quantityDisplay">${burger.quantity}</span>
-            <button class="increase" onclick="changeQuantity(${index}, 1)">+</button>
-            <button class="remove" onclick="removeFromBasket(${index})">🗑️</button>
-          </div>
-        </div>
-      `;
-  });
+function updateBasketUI(basketContainer, mobileBasketContainer, basketHTML) {
+  basketContainer.innerHTML = basketHTML;
+  mobileBasketContainer.innerHTML = basketHTML;
+}
 
-  let totalPrice = subtotal + deliveryCost;
-
-  basketToHTML += `
-      <br>
-      <p><b>Zwischensumme:</b> ${subtotal.toFixed(2)} €</p>
-      <p><b>Lieferkosten:</b> ${deliveryCost.toFixed(2)} €</p>
-      <p><b>Gesamtpreis:</b> ${totalPrice.toFixed(2)} €</p>
-    `;
-
-  basketContainer.innerHTML = basketToHTML;
-
-  mobileBasketContainer.innerHTML = basketToHTML;
-
+function toggleOverlay(show) {
   const overlay = document.getElementById("overlay");
   if (overlay) {
-    overlay.style.display = "block";
+    if (show) {
+      overlay.classList.add("visible");
+    } else {
+      overlay.classList.remove("visible");
+    }
   }
 }
 
+
+function getTotalItems() {
+  let totalItems = 0;
+  for (let i = 0; i < basket.length; i++) {
+    totalItems += basket[i].quantity;
+  }
+  return totalItems;
+}
+
 function openBasket() {
-  document.getElementById("mobileBasket").innerHTML =
-    document.getElementById("basket").innerHTML;
-  document.getElementById("basketOverlay").style.display = "flex";
+  copyBasketContentToMobile();
+  showBasketOverlay();
   toggleBodyScroll();
 }
 
 function closeBasket() {
-  document.getElementById("basketOverlay").style.display = "none";
+  hideBasketOverlay();
   toggleBodyScroll();
 }
+
+function copyBasketContentToMobile() {
+  const basketElement = document.getElementById("basket");
+  const mobileBasketElement = document.getElementById("mobileBasket");
+  mobileBasketElement.innerHTML = basketElement.innerHTML;
+}
+
+let isBasketOpen = false;
+
+function toggleBasket() {
+  const basketOverlay = document.getElementById("basketOverlay");
+  const basketButton = document.querySelector(".basketButton");
+
+  if (isBasketOpen) {
+    basketOverlay.classList.remove("visible");
+    basketButton.innerHTML = "Warenkorb öffnen";
+    basketButton.classList.remove("fixed");
+    basketButton.classList.add("sticky");
+  } else {
+    basketOverlay.classList.add("visible");
+    basketButton.innerHTML = "Warenkorb schließen";
+    basketButton.classList.remove("sticky");
+    basketButton.classList.add("fixed");
+  }
+  isBasketOpen = !isBasketOpen;
+  toggleBodyScroll();
+}
+
 function toggleBodyScroll() {
   const basketOverlay = document.getElementById("basketOverlay");
-  if (basketOverlay.style.display === "flex") {
-      document.body.style.overflow = "hidden"; // Scrollen deaktivieren
+
+  if (isBasketOpen) {
+    document.body.classList.add("no-scroll");
+    basketOverlay.classList.add("scrollable");
   } else {
-      document.body.style.overflow = "auto"; // Scrollen wieder aktivieren
+    document.body.classList.remove("no-scroll");
+    basketOverlay.classList.remove("scrollable");
   }
+}
+
+function orderBasket() {
+  basket = [];
+  showBasket();
 }

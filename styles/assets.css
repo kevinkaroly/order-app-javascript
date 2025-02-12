@@ -23,3 +23,21 @@
   transform: scale(1.05);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
+
+.orderBtn {
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.orderBtn:hover {
+  transform: scale(1.02);
+}
+
+.orderBtn:active {
+  transform: scale(1.01);
+}
+
+.backBtn{
+  background-color: blue;
+  margin-left: 0;
+}

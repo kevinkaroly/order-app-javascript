@@ -1,5 +1,5 @@
 function createHeader() {
-    return `
+  return `
             <div id="headerContainer">
                 <img
                     class="foodImg"
@@ -13,7 +13,7 @@ function createHeader() {
 }
 
 function createBurgerTemplate(burger, index) {
-    return `
+  return `
         <div class="burgerItem">
             <h3>${burger.name}</h3>
             <p>${burger.description}</p>
@@ -24,11 +24,40 @@ function createBurgerTemplate(burger, index) {
         </div>
     `;
 }
+function createBasketButton() {
+  return `
+      <button id="basketButton" class="basketButton" onclick="toggleBasket()">Warenkorb schließen</button>
+    `;
+}
 
+function createBasketTemplate(basket, subtotal, deliveryCost, totalPrice) {
+  return `
+        <h3>Warenkorb (${getTotalItems(basket)} Artikel)</h3><br>
+        ${createBasketItems(basket)}
+        <br>
+        <p><b>Zwischensumme:</b> ${subtotal.toFixed(2)} €</p>
+        <p><b>Lieferkosten:</b> ${deliveryCost.toFixed(2)} €</p>
+        <p><b>Gesamtpreis:</b> ${totalPrice.toFixed(2)} €</p>
 
-function renderMenu() {
-    const menuContainer = document.getElementById("menu");
-    
-    menuContainer.innerHTML = createHeader() + burgerMenu.map((burger, index) => createBurgerTemplate(burger, index)).join("");
+        <button class="btn orderBtn" onclick="orderBasket(); window.location.href='order.html';">Bestellen</button>
+    `;
+}
+
+function createBasketItems(basket) {
+  let basketItems = "";
+  for (let i = 0; i < basket.length; i++) {
+    basketItems += `
+            <div class="burgerInBasket">
+                <p>${basket[i].name} - ${basket[i].price.toFixed(2)} €</p>
+                <div class="burgerControls">
+                    <button class="decrease" onclick="changeQuantity(${i}, -1)">-</button>
+                    <span class="quantityDisplay">${basket[i].quantity}</span>
+                    <button class="increase" onclick="changeQuantity(${i}, 1)">+</button>
+                    <button class="remove" onclick="removeFromBasket(${i})">🗑️</button>
+                </div>
+            </div>
+        `;
+  }
+  return basketItems;
 }
 

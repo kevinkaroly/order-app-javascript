@@ -1,4 +1,5 @@
 h3 {
+  margin-top: 10px;
   text-align: center;
 }
 
@@ -11,7 +12,6 @@ h3 {
 
 #basket {
   width: 100%;
-  max-height: 820px;
   overflow: auto;
   position: sticky;
   top: 0;
@@ -43,7 +43,7 @@ h3 {
 .burgerControls {
   display: flex;
   align-items: center;
-  gap: 15px; /* Abstand zwischen den Buttons und der Menge */
+  gap: 15px;
 }
 
 .burgerControls button {
@@ -66,7 +66,7 @@ h3 {
 }
 
 .burgerControls button.remove {
-  background-color: #e74c3c; /* Roter Müllkorb */
+  background-color: #e74c3c;
   font-size: 20px;
   width: 45px;
   height: 45px;
@@ -104,7 +104,7 @@ h3 {
 
 #basketContent {
   background: white;
-  padding: 20px;
+  padding-bottom: 65px;
   width: 100%;
   max-width: 600px;
   border-radius: 8px;
@@ -112,7 +112,7 @@ h3 {
   text-align: center;
   margin: 0 auto;
 }
-#basketButton {
+.basketButton {
   display: none;
 }
 
@@ -128,7 +128,7 @@ h3 {
 }
 
 @media (max-width: 768px) {
-  #basketContent{
+  #basketContent {
     overflow: auto;
   }
 
@@ -143,6 +143,8 @@ h3 {
   }
 
   #basketButton {
+    position: sticky;
+    bottom: 0;
     background-color: #0d00ff;
     color: white;
     border: none;
@@ -155,27 +157,30 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1000;
   }
-
+  .fixed {
+    position: fixed !important;
+  }
   #menu {
     width: auto;
   }
 }
 
-@media (max-width: 400px){
-  h1{
+@media (max-width: 400px) {
+  h1 {
     font-size: 25px;
   }
 
-  h3{
+  h3 {
     font-size: 16px;
   }
 
-  p{
+  p {
     font-size: 14px;
   }
-  
-  .restaurantRating{
+
+  .restaurantRating {
     font-size: 14px;
   }
 }
